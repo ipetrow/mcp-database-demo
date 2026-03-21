@@ -1,5 +1,5 @@
-from config.connection import get_connection
-from models.book import Book
+from database.config.connection import get_connection
+from database.models.book import Book
 
 def input_initial_data():
     """Inputs the initial books data in the database."""

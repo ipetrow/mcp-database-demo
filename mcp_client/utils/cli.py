@@ -11,8 +11,9 @@ def parse_args():
 
     parser = argparse.ArgumentParser("Simple MCP Client")
     parser.add_argument(
-        "server_script_path",
+        "--server",
         type=pathlib.Path,
+        required=True,
         help="the MCP Server script path",
     )
 
