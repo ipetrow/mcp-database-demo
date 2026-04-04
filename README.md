@@ -2,8 +2,8 @@
 This repository presents an agentic MCP Client-Server workflow that allows to manipulate a database data by using a natural language.
 
 # Prerequisites
-- Installed Python ‘uv’ package and project management tool. A basic understanding of how the tool works would be helpful for a better insight of how the project is set up and executed.
-- Installed Python version 3.14.2 or higher. **Note**: It is recommended to keep the system Python clean. Therefore, use 'pyenv', 'uv' for managing other Python versions.
+- Installed Python `uv` package and project management tool. A basic understanding of how the tool works would be helpful for a better insight of how the project is set up and executed.
+- Installed Python version 3.14.2 or higher. **Note**: It is recommended to keep the system Python clean. Therefore, use `pyenv`, `uv` for managing other Python versions.
 - An OpenAI API key included in the environment variables.
 
 # Project Details
@@ -40,7 +40,7 @@ If you would like to experiement and create a new `bookslog.db` the following co
 For the purpose of the demo, sample data is automatically being inserted in the database right after its creation. The data can be manipulated from the `initial_data.py` file.
 
 # Large Language Model
-In this example, OpenAI TODO model is used from Azure - The GPT model was deployed in Azure and the Azure OpenAI API key used for the connection with the LLM. This integration allows the User to interact on an abstract level with the tools exposed from the MCP Server.
+In this example, OpenAI `gpt-5-mini` model is used from Azure - The GPT model was deployed in Azure and the Azure OpenAI API key used for the connection with the LLM. This integration allows the User to interact on an abstract level with the tools exposed from the MCP Server.
 
 ## Integration Details
 - OpenAI Python API: the library provides access to the OpenAI REST API.
@@ -51,12 +51,12 @@ In this example, OpenAI TODO model is used from Azure - The GPT model was deploy
 1. Clone the repository: `git clone git@github.com:ipetrow/mcp-database-demo.git`.
 2. [Optional] Generate a new database with updated data. Ensure to move the newly generated `bookslog.db` file in the `mcp_server` directory.
 3. Sync the project in order to download and install all the required project dependencies and they are up to date: `uv sync`. This will create the project virtual environment (`.venv`) as well.
-4. Update the model name in `mcp_client/query_handler.py` by providing a value for the `MODEL` constant.
-5. Update the Azure endpoint in `mcp_client/query_handler.py` by providing a value for the `ENDPOINT` constant.
-6. Double check the OpenAI API key is added in the environment variables. The name of the variable is `OPENAI_API_KEY` and retrieved in `mcp_client/query_handler.py`.
+4. Update the model name in `mcp_client/llm/openai_service.py` by providing a value for the `MODEL` constant.
+5. Update the Azure endpoint in `mcp_client/llm/openai_service.py` by providing a value for the `ENDPOINT` constant.
+6. Double check the OpenAI API key is added in the environment variables. The name of the variable is `OPENAI_API_KEY` and retrieved in `mcp_client/llm/openai_service.py`.
 
 ## Execution
-Start the MCP Client and connect to the MCP Server by: `uv run python mcp_client ./mcp_server/sqlite_server.py`
+Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client ./mcp_server/sqlite_server.py`
 
 ## Prompt Examples
 **Simple Prompts (using single tools)**

@@ -36,12 +36,12 @@ class MCPClient:
 
             await client_session.initialize()
             return client_session
-        except Exception:
-            raise RuntimeError("Error trying to connect to MCP Server")
+        except Exception as e:
+            raise RuntimeError(f"Error trying to connect to MCP Server {self.server_path}: {e}")
     
     async def __aenter__(self) -> Self:
             self.session = await self._connect_to_server()
-            self._list_available_tools()
+            await self._list_available_tools()
             return self
 
     async def __aexit__(self, *_) -> None:
@@ -66,5 +66,9 @@ class MCPClient:
     async def _list_available_tools(self) -> None:
         """Lists the available tools provided by the MCP Server."""
 
-        tools = (await self.require_session.list_tools()).tools
-        print("\nMCP Server available tools:", [tool.name for tool in tools])
+        try:
+             tools_response = await self.session.list_tools()
+             if tools_response and tools_response.tools:
+                print("\nMCP Server available tools:", [tool.name for tool in tools_response.tools])
+        except Exception as e:
+            print(f"Error {e}")
