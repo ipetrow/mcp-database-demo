@@ -56,7 +56,7 @@ In this example, OpenAI `gpt-5-mini` model is used from Azure - The GPT model wa
 6. Double check the OpenAI API key is added in the environment variables. The name of the variable is `OPENAI_API_KEY` and retrieved in `mcp_client/llm/openai_service.py`.
 
 ## Execution
-Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client ./mcp_server/sqlite_server.py`
+Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client --server ./mcp_server/sqlite_server.py`
 
 ## Prompt Examples
 **Simple Prompts (using single tools)**
@@ -68,7 +68,7 @@ Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_cli
 **Advanced Prompts**
 - "Can you recommend me 3 books that match my interests? For a reference, use the titles in the database."
 
-# Resources
+# References
 - Build an MCP server: https://modelcontextprotocol.io/docs/develop/build-server
 - Build an MCP client: https://modelcontextprotocol.io/docs/develop/build-client
 - Build a Python MCP Client to Test Servers From Your Terminal: https://realpython.com/python-mcp-client/
