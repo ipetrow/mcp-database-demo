@@ -1,4 +1,4 @@
-from config.connection import get_connection
+from database.config.connection import get_connection
 
 def create_db() -> None:
     """Creates an empty database with a single 'books' table."""

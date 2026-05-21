@@ -1,15 +1,18 @@
 import sqlite3
-from typing import List, Tuple
+import json
+from pathlib import Path 
+from typing import List
 from mcp.server.fastmcp import FastMCP
 
-DATABASE_NAME = "booklog"
-DATABASE = f"{DATABASE_NAME}.db"
+DATABASE_NAME = "bookslog"
+FILE_BASE_DIR = Path(__file__).parent.resolve()
+DATABASE_PATH = f"{FILE_BASE_DIR}/{DATABASE_NAME}.db"
 
 # Initialize FastMCP server
-mcp = FastMCP(DATABASE_NAME)
+mcp = FastMCP(DATABASE_PATH)
 
 @mcp.tool()
-def get_books() -> List[Tuple[int, str, str, str, int]]:
+def get_books() -> str:
     """
     Gets all the books from the database.
 
@@ -17,17 +20,33 @@ def get_books() -> List[Tuple[int, str, str, str, int]]:
         A list with all the books in the database.
     """
 
-    conn = sqlite3.connect(DATABASE)
+    conn = sqlite3.connect(DATABASE_PATH)
     cur = conn.cursor()
 
     query = "SELECT * FROM books"
 
-    table_list = [row for row in cur.execute(query)] 
+    rows = [row for row in cur.execute(query)]
+
+    books = [
+        {
+            "isbn": row[1],
+            "title": row[2],
+            "author": row[3],
+            "pages_num": row[4]
+        }
+        for row in rows
+    ]
+
+    response = {
+        "books": books
+    }
+
+    books_json = json.dumps(response, indent=2)
 
     conn.commit()
     conn.close()
 
-    return table_list
+    return books_json
 
 @mcp.tool()
 def get_books_titles() -> List[str]:
@@ -38,17 +57,17 @@ def get_books_titles() -> List[str]:
         A list with all the book titles in the database.
     """
 
-    conn = sqlite3.connect(DATABASE)
+    conn = sqlite3.connect(DATABASE_PATH)
     cur = conn.cursor()
 
     query = "SELECT title FROM books"
 
-    table_list = [row[0] for row in cur.execute(query)] 
+    rows = [row for row in cur.execute(query)]
 
     conn.commit()
     conn.close()
 
-    return table_list
+    return rows
 
 @mcp.tool()
 def insert_book(
@@ -70,7 +89,7 @@ def insert_book(
         None
     """
 
-    conn = sqlite3.connect(DATABASE)
+    conn = sqlite3.connect(DATABASE_PATH)
     cur = conn.cursor()
 
     query="""
@@ -98,7 +117,7 @@ def delete_book(
         None
     """
 
-    conn = sqlite3.connect(DATABASE)
+    conn = sqlite3.connect(DATABASE_PATH)
     cur = conn.cursor()
 
     query="""
@@ -127,7 +146,7 @@ def update_book_title(
         None
     """
 
-    conn = sqlite3.connect(DATABASE)
+    conn = sqlite3.connect(DATABASE_PATH)
     cur = conn.cursor()
 
     query = """
