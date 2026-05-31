@@ -1,9 +1,9 @@
 # Overview
-This repository presents an agentic MCP Client-Server workflow that allows to manipulate a database data by using a natural language.
+The repository presents an Agentic AI MCP Client-Server workflow that allows to manipulate a database data by using a natural language.
 
 # Prerequisites
 - Installed Python `uv` package and project management tool. A basic understanding of how the tool works would be helpful for a better insight of how the project is set up and executed.
-- Installed Python version 3.14.2 or higher. **Note**: It is recommended to keep the system Python clean. Therefore, use `pyenv`, `uv` for managing other Python versions.
+- Installed Python version 3.14.2 or higher.
 - An OpenAI API key included in the environment variables.
 
 # Project Details
@@ -56,7 +56,7 @@ In this example, OpenAI `gpt-5-mini` model is used from Azure - The GPT model wa
 6. Double check the OpenAI API key is added in the environment variables. The name of the variable is `OPENAI_API_KEY` and retrieved in `mcp_client/llm/openai_service.py`.
 
 ## Execution
-Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client --server ./mcp_server/sqlite_server.py`
+Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client --server ./mcp_server/sqlite_server.py`.
 
 ## Prompt Examples
 **Simple Prompts (using single tools)**

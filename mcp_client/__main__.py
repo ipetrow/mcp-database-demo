@@ -2,7 +2,7 @@ import asyncio
 
 from mcp_client.mcp_client import MCPClient
 from mcp_client.utils.cli import parse_args
-from mcp_client.llm.openai_service import OpenAIService
+from mcp_client.llm.openai_service_responses_api import OpenAIService
 from mcp_client.interface import ChatInterface
 
 async def main() -> None:

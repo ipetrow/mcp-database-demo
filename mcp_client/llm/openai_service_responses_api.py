@@ -65,6 +65,8 @@ class OpenAIService(LLMService):
                 tools=available_tools
             )
 
+            print("DEBUG: >>>>>>>>>>>")
+
             # hadle all output items
             for output_item in response.output:
 
@@ -92,14 +94,16 @@ class OpenAIService(LLMService):
 
                     context.append(
                         {
-                            "role": "assistant",
-                            "tool_calls": output_item
+                            "type": "function_call",
+                            "call_id": output_item.call_id, 
+                            "name": output_item.name,
+                            "arguments": output_item.arguments or {}
                         }
                     )
 
                     tool_result = await self._execute_tool(output_item, client_session)
                     final_result.append(tool_result["log"])
-                    tool_outputs.append(json.dumps(tool_result["message"]))
+                    tool_outputs.append(tool_result["message"])
 
             if not has_function_call: # no function calls - agentic loop termination
                 break
