@@ -1,9 +1,9 @@
 # Overview
-This repository presents an agentic MCP Client-Server workflow that allows to manipulate a database data by using a natural language.
+The repository presents an Agentic AI MCP Client-Server workflow that allows to manipulate a database data by using a natural language.
 
 # Prerequisites
-- Installed Python `uv` package and project management tool. A basic understanding of how the tool works would be helpful for a better insight of how the project is set up and executed.
-- Installed Python version 3.14.2 or higher. **Note**: It is recommended to keep the system Python clean. Therefore, use `pyenv`, `uv` for managing other Python versions.
+- Installed Python `uv` package and project management tool.
+- Installed Python version 3.14.2 or higher.
 - An OpenAI API key included in the environment variables.
 
 # Project Details
@@ -44,19 +44,21 @@ In this example, OpenAI `gpt-5-mini` model is used from Azure - The GPT model wa
 
 ## Integration Details
 - OpenAI Python API: the library provides access to the OpenAI REST API.
-- Chat Completions API: an interface for interacting with the LLM.
+- OpenAI Responses API: an interface for interacting with the LLM.
+
+**Note**: An earlier version if the ecample relied on the older OpenAI Chat Completions API. The implementation can be checked in `mcp_client/llm/openai_service.py`
 
 # Running the Example
 ## Setup
 1. Clone the repository: `git clone git@github.com:ipetrow/mcp-database-demo.git`.
 2. [Optional] Generate a new database with updated data. Ensure to move the newly generated `bookslog.db` file in the `mcp_server` directory.
 3. Sync the project in order to download and install all the required project dependencies and they are up to date: `uv sync`. This will create the project virtual environment (`.venv`) as well.
-4. Update the model name in `mcp_client/llm/openai_service.py` by providing a value for the `MODEL` constant.
-5. Update the Azure endpoint in `mcp_client/llm/openai_service.py` by providing a value for the `ENDPOINT` constant.
-6. Double check the OpenAI API key is added in the environment variables. The name of the variable is `OPENAI_API_KEY` and retrieved in `mcp_client/llm/openai_service.py`.
+4. Update the model name in `mcp_client/llm/openai_service_responses_api.py` by providing a value for the `MODEL` constant.
+5. Update the Azure endpoint in `mcp_client/llm/openai_service_responses_api.py` by providing a value for the `ENDPOINT` constant.
+6. Double check the OpenAI API key is added in the environment variables. The name of the variable is `OPENAI_API_KEY` and retrieved in `mcp_client/llm/openai_service_responses_api.py`.
 
 ## Execution
-Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client ./mcp_server/sqlite_server.py`
+Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_client --server ./mcp_server/sqlite_server.py`.
 
 ## Prompt Examples
 **Simple Prompts (using single tools)**
@@ -68,7 +70,7 @@ Start the MCP Client and connect to the MCP Server by: `uv run python -m mcp_cli
 **Advanced Prompts**
 - "Can you recommend me 3 books that match my interests? For a reference, use the titles in the database."
 
-# Resources
+# References
 - Build an MCP server: https://modelcontextprotocol.io/docs/develop/build-server
 - Build an MCP client: https://modelcontextprotocol.io/docs/develop/build-client
 - Build a Python MCP Client to Test Servers From Your Terminal: https://realpython.com/python-mcp-client/
